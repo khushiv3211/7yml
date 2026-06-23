@@ -1,0 +1,51 @@
+1: Update System and Install Java
+
+sudo apt update
+sudo apt install openjdk-17-jdk -y
+java -version
+
+2.Jenkins Installation on Ubuntu (Latest Method)
+
+https://pkg.jenkins.io/
+
+3: Start and Enable Jenkins
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+sudo systemctl status jenkins  
+
+4: Get Jenkins Admin Password
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+
+5: Access Jenkins Web Interface
+
+first allow custom tcp port 8080 by selecting anywhere with ipv4 with all zeros in security grops of that instance 
+http://your-server-ip(public-ip):8080
+
+0d740e938eef4641b36cd509577aabfe
+
+6.next install maven
+
+wget https://archive.apache.org/dist/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
+sudo tar -xvzf apache-maven-3.9.6-bin.tar.gz -C /opt/
+echo &#39;export PATH=/opt/apache-maven-3.9.6/bin:$PATH&#39; | sudo tee/etc/profile.d/maven.sh
+source /etc/profile.d/maven.sh
+mvn -version
+
+
+7.next go to jenkins ui there under manage plugins , install maven integartion plugin,next go to tools 
+there add maven like give name as maven 3.9.6, uncheck install automatically there u type /opt/apache-maven-3.9.6
+clik save
+
+8.next create a freetsyle job under this give git repo and underbuild steps
+select Invoke top-level Maven targets next type maven version as Maven 3.9.6 and goals as clean install and save
+
+9.next run the build, there it will show you the jar file creation
+
+10. to check our jar file
+sudo su - jenkins
+cd /var/lib/jenkins/.m2/repository/com/mycompany/app/my-app/1.0-SNAPSHOT/
+
+11.to see the outcome of jar file
+java -jar my-app-1.0-SNAPSHOT.jar
+o/p: Hello world
