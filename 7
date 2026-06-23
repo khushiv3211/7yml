@@ -1,0 +1,20 @@
+[node_machines]
+3.89.225.137 ansible_ssh_user=ubuntu
+
+
+---
+- name: Install a package on the node machine
+  hosts: node_machines
+  become: yes
+
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
