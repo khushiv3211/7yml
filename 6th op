@@ -1,0 +1,2 @@
+sudo su - jenkins
+java -jar my-app-1.0-SNAPSHOT.jar
