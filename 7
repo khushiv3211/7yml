@@ -1,6 +1,25 @@
+sudo apt update
+sudo apt install -y ansible
+ansible --version
+
+ansible localhost -m ping
+
+On the master machine, run:
+ssh-keygen
+cd .ssh
+ls
+
+
+echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINe5kpziiy0nsgpa0RcY26KmIYYEL/1ehNSbmb1t+tSZ ubuntu@ip-172-31-22-41" >> ~/.ssh/authorized_keys
+
+
+1.nano ~/inventory.ini
+
+now here add the public ip of node machine and save it like cntrl-o+enter+cntrl-x
 [node_machines]
 3.89.225.137 ansible_ssh_user=ubuntu
 
+2.nano ~/install_package.yml
 
 ---
 - name: Install a package on the node machine
@@ -18,3 +37,18 @@
       apt:
         name: nginx
         state: present
+
+
+to save give cntrl-o+enter+cntrl-x
+
+
+3.ansible-playbook -i ~/inventory.ini ~/install_package.yml
+
+
+4.ssh ubuntu@node-ip
+
+
+5. systemctl status nginx
+
+
+6.in aws go to node machine there in security groups allow http 80 port from anywhere ipv4 , after that in broswer page type http://node-ip, it will display nginx welcome page
