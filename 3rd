@@ -17,6 +17,7 @@ gradle -v
 2: Create a Gradle Project
 mkdir my-gradle-project && cd my-gradle-project
 gradle init
+
 Select type of project to generate:
  1: basic
  2: application
